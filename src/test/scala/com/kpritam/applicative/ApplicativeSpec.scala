@@ -21,7 +21,6 @@ trait ApplicativeProperties[Box[_]] extends SimpleCategoryUtils {
   self: Properties =>
 
   val applicative: Applicative[Box]
-
   import applicative._
 
   implicit def arbitrary: Arbitrary[Box[A]]
