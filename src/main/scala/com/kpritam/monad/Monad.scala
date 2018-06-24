@@ -13,9 +13,7 @@ trait Monad[Box[_]] extends Applicative[Box] {
   override def ap[A, B](boxF: Box[A => B])(boxA: Box[A]): Box[B] =
     flatMap(boxF)(map(boxA))
 
-  override def map[A, B](boxA: Box[A])(f: A => B): Box[B] = {
-    //    flatMap(boxA)(pure)(f)
+  override def map[A, B](boxA: Box[A])(f: A => B): Box[B] =
     flatMap(boxA)(a ⇒ pure(f(a)))
-  }
 
 }
