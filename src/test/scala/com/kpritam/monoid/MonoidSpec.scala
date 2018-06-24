@@ -6,7 +6,6 @@ import org.scalacheck.{Arbitrary, Properties}
 import scala.reflect._
 
 class IntMonoidSpec extends MonoidSpec[Int](MonoidInstances.intMonoid)
-
 class StringMonoidSpec extends MonoidSpec[String](MonoidInstances.stringMonoid)
 
 abstract class MonoidSpec[A: ClassTag](monoid: Monoid[A])(
