@@ -6,6 +6,7 @@ import com.kpritam.functor.FunctorInstances.maybeFunctor
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Arbitrary, Properties}
 
+import scala.language.higherKinds
 import scala.reflect.ClassTag
 
 class MaybeFunctorSpec extends FunctorSpec(maybeFunctor)
