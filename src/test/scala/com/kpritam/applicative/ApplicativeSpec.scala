@@ -37,7 +37,7 @@ trait ApplicativeProperties[Box[_]] extends SimpleCategoryUtils {
   }
 
   // ap(pure(f))(pure(a)) == pure(f(a))
-  property("homorphism") = forAll { a: A =>
+  property("homomorphism") = forAll { a: A =>
     ap(pureF)(pure(a)) == pure(f(a))
   }
 
