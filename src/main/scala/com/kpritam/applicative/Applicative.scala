@@ -4,10 +4,16 @@ import com.kpritam.functor.Functor
 
 import scala.language.higherKinds
 
-trait Applicative[Box[_]] extends Functor[Box] {
-  def pure[A](a: A): Box[A]
+trait Applicative[F[_]] extends Functor[F] {
+  def pure[A](a: A): F[A]
 
-  def ap[A, B](boxF: Box[A ⇒ B])(boxA: Box[A]): Box[B]
+  def ap[A, B](ff: F[A ⇒ B])(fa: F[A]): F[B]
 
-  override def map[A, B](boxA: Box[A])(f: A ⇒ B): Box[B] = ap(pure(f))(boxA)
+  override def map[A, B](fa: F[A])(f: A ⇒ B): F[B] = ap(pure(f))(fa)
+
+  def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z] =
+    ap(fa)(map(fb)(b => f(_, b)))
+
+  def tuple2[A, B](fa: F[A], fb: F[B]): F[(A, B)] =
+    map2(fa, fb)((_, _))
 }
