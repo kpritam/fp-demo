@@ -12,7 +12,7 @@ trait Applicative[F[_]] extends Functor[F] {
   override def map[A, B](fa: F[A])(f: A ⇒ B): F[B] = ap(pure(f))(fa)
 
   def map2[A, B, Z](fa: F[A], fb: F[B])(f: (A, B) => Z): F[Z] =
-    ap(fa)(map(fb)(b => f(_, b)))
+    ap(map(fb)(b => f(_, b)))(fa)
 
   def tuple2[A, B](fa: F[A], fb: F[B]): F[(A, B)] =
     map2(fa, fb)((_, _))
